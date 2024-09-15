@@ -1,0 +1,189 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.report-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.report-header {
+    border-bottom: 3px solid #1ac236;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.report-header h1 {
+    text-align: center;
+    color:#1ac236;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.patient-info {
+    width: 70%;
+}
+
+.patient-info p {
+    font-size: 16px;
+    color: #555;
+}
+
+.patient-photo {
+    width: 15%;
+}
+
+.patient-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Key Metrics */
+.key-metrics table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.key-metrics table, th, td {
+    border: 1px solid #ddd;
+}
+
+.key-metrics th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.key-metrics th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+/* Progress Charts */
+.visual-progress {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.visual-progress .progress-chart {
+    width: 45%;
+    text-align: center;
+}
+
+.visual-progress img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Next Steps */
+.next-steps p {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Footer */
+.report-footer {
+    margin-top: 30px;
+    text-align: center;
+    border-top: 3px solid #1ac236;
+    padding-top: 10px;
+}
+
+.report-footer p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* PDF Button Styling */
+.pdf-button-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#generate-pdf {
+    background-color:#1ac236 ;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#generate-pdf:hover {
+    background-color: #1ac236;
+}
+
+/* Responsive Styling */
+@media (max-width: 900px) {
+    .report-wrapper {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .header-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .patient-photo {
+        width: 50%;
+        margin-top: 10px;
+    }
+
+    .visual-progress {
+        flex-direction: column;
+    }
+
+    .visual-progress .progress-chart {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

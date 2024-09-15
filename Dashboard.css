@@ -1,0 +1,205 @@
+/* General layout and fonts */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Subtle gradient */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  aside {
+    width: 250px;
+    background: rgba(51, 51, 51, 0.6); /* Semi-transparent dark background */
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+    backdrop-filter: blur(10px); /* Glassmorphism blur effect */
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Frosted shadow */
+  }
+  
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .danger {
+    color: red;
+  }
+  
+  /* Sidebar Menu Styles */
+  .sidebar-menu {
+    margin-top: 40px;
+  }
+  
+  .sidebar-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+    transform: translateX(10px); /* Slight move on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  }
+  
+  .sidebar-menu li a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-menu li:hover a {
+    color: #f1c40f; /* Change text color on hover */
+  }
+  
+  .sidebar-menu li span {
+    color: #f1c40f; /* Icon color */
+    font-size: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-menu li:hover span {
+    color: white; /* Change icon color on hover */
+  }
+  
+  /* Main content */
+  main {
+    width: calc(100% - 250px);
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.3); /* Frosted glass background */
+    backdrop-filter: blur(15px); /* Stronger blur for main content */
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Frosted shadow */
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .date input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Insights Cards */
+  .insights {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .insights .sales,
+  .insights .expenses,
+  .insights .income {
+    background: rgba(255, 255, 255, 0.2); /* Translucent white background */
+    padding: 20px;
+    border-radius: 15px; /* Rounded corners */
+    backdrop-filter: blur(10px); /* Glass blur */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    width: 30%;
+    color: #333;
+  }
+  
+  .material-icons-sharp {
+    font-size: 50px;
+    color: #333;
+  }
+  
+  .middle {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .text-muted {
+    color: gray;
+  }
+  
+  /* Charts Container */
+  .charts-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .chart {
+    width: 30%;
+    background: rgba(255, 255, 255, 0.2); /* Translucent background */
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recent-orders {
+    margin-top: 30px;
+  }
+  
+  .recent-orders table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recent-orders th,
+  .recent-orders td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+  }
+  
+  /* Additional Glassmorphism Styling */
+  .recent-orders th {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .recent-orders td {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* General Styles for Responsive Design */
+  @media (max-width: 768px) {
+    main {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .insights {
+      flex-direction: column;
+    }
+  
+    .charts-container {
+      flex-direction: column;
+    }
+  
+    .chart, .insights .sales, .insights .expenses, .insights .income {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }

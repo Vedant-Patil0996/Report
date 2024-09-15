@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Therapy Session Report</title>
+    <link rel="stylesheet" href="styles1.css">
+    <!-- Add a script to handle PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="report-wrapper" id="report-content">
+        <!-- Report Header -->
+        <header class="report-header">
+            <h1>Session Report</h1>
+            <div class="header-info">
+                <div class="patient-info">
+                    <p><strong>Patient Name:</strong> John Doe</p>
+                    <p><strong>Patient ID:</strong> D-1562</p>
+                    <p><strong>Session Date:</strong> 22-2-22</p>
+                    <p><strong>Therapist:</strong> Dr.Smith</p>
+                </div>
+                <div class="patient-photo">
+                    <img src="pfp.png" alt="Patient Photo" id="patient-photo">
+                </div>
+            </div>
+        </header>
+
+        <!-- Patient History Section -->
+        <section class="patient-history">
+            <h2>Patient History</h2>
+            <p><strong>Diagnosis:</strong> Heavy tongue and salivation</p>
+            <p><strong>Therapy Start Date:</strong> 16-1-22</p>
+            <p><strong>Previous Session number:</strong> 6</p>
+        </section>
+
+        <!-- Session Summary Section -->
+        <section class="session-summary">
+            <h2>Session Overview</h2>
+            <p>
+                Valorant is a free-to-play tactical first-person shooter developed by Riot Games, 
+                known for its emphasis on team-based strategy and precise gunplay. 
+                Released in 2020, the game combines elements of traditional shooters like Counter-Strike with 
+                the unique abilities of characters called "agents," each offering distinctive powers
+                that can turn the tide of a match. The game is played in 5v5 format, where one team 
+                attacks by planting a spike, and the other defends by preventing it or defusing it. 
+                Valorant's competitive nature has attracted a large player base and an active esports scene. 
+                Its vibrant art style, strategic depth, and high skill ceiling make it appealing to both 
+                casual players and professional gamers alike.
+            </p>
+
+            <h2>Activities Conducted</h2>
+            
+                <li>Activity 1: Speech therapy Game</li>
+                <li>Activity 2: On Video Call Pronunciations</li>
+                <li>Activity 3: Article reading</li>
+            
+        </section>
+
+        <!-- Key Metrics Section -->
+        <section class="key-metrics">
+            <h2>Key Metrics</h2>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Assessment</th>
+                </tr>
+                <tr>
+                    <td>Pronunciation Accuracy</td>
+                    <td>88%</td>
+                </tr>
+                <tr>
+                    <td>Words Practiced</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Words Mastered</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Areas of Improvement</td>
+                    <td>More practice needed in words ending with s or having multiple sss</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Visual Progress Charts Section -->
+        <section class="visual-progress">
+            <h2>Progress Overview</h2>
+            <div class="progress-chart">
+                <p>Chart 1: Pronunciation Accuracy Over Time</p>
+                <img src="placeholder-chart.png" alt="Pronunciation Chart">
+            </div>
+            <div class="progress-chart">
+                <p>Chart 2: Words Mastered Over Time</p>
+                <img src="placeholder-chart-2.png" alt="Words Mastered Chart">
+            </div>
+        </section>
+
+        <!-- Next Steps Section -->
+        <section class="next-steps">
+            <h2>Next Steps</h2>
+            <p><strong>Goals for Next Session:</strong> more complex words</p>
+            <p><strong>Recommended Activities:</strong> elocution and slow oral pronounciations</p>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="report-footer">
+            <p><strong>Next Session Date:</strong> 25-1-22</p>
+            <p><strong>Report Prepared By:</strong> Dr.Smith</p>
+        </footer>
+    </div>
+
+    <!-- Button to Generate PDF -->
+    <div class="pdf-button-wrapper">
+        <button id="generate-pdf">Generate PDF</button>
+    </div>
+
+    <script>
+        // PDF generation function
+        document.getElementById('generate-pdf').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Convert the report content to PDF
+            doc.html(document.querySelector('#report-content'), {
+                callback: function (pdf) {
+                    pdf.save('session_report.pdf');
+                },
+                x: 10,
+                y: 10
+            });
+        });
+    </script>
+</body>
+</html>

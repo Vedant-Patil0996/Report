@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supervisor Dashboard</title>
+
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+
+    <!-- Custom Style -->
+    <style>
+      /* General layout and fonts */
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Subtle gradient */
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      aside {
+        width: 250px;
+        background: rgba(51, 51, 51, 0.6); /* Semi-transparent dark background */
+        color: #fff;
+        height: 100vh;
+        padding: 20px;
+        backdrop-filter: blur(10px); /* Glassmorphism blur effect */
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Frosted shadow */
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .danger {
+        color: red;
+      }
+
+      .sidebar-menu ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar-menu ul li {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        transition: background-color 0.3s;
+      }
+
+      .sidebar-menu ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 18px;
+        margin-left: 10px;
+      }
+
+      .sidebar-menu ul li:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .sidebar-menu ul li span {
+        color: #fff;
+        font-size: 24px;
+      }
+
+      /* Main content */
+      main {
+        width: calc(100% - 250px);
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.3); /* Frosted glass background */
+        backdrop-filter: blur(15px); /* Stronger blur for main content */
+        border-radius: 10px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Frosted shadow */
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .date input {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Insights Cards */
+      .insights {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .insights .sales,
+      .insights .expenses,
+      .insights .income {
+        background: rgba(255, 255, 255, 0.2); /* Translucent white background */
+        padding: 20px;
+        border-radius: 15px; /* Rounded corners */
+        backdrop-filter: blur(10px); /* Glass blur */
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        width: 30%;
+        color: #333;
+      }
+
+      .material-icons-sharp {
+        font-size: 50px;
+        color: #333;
+      }
+
+      .middle {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .text-muted {
+        color: gray;
+      }
+
+      /* Charts Container */
+      .charts-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+
+      .chart {
+        width: 30%;
+        background: rgba(255, 255, 255, 0.2); /* Translucent background */
+        padding: 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .recent-orders {
+        margin-top: 30px;
+      }
+
+      .recent-orders table {
+        width: 100%;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .recent-orders th,
+      .recent-orders td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        color: #333;
+      }
+
+      /* Additional Glassmorphism Styling */
+      .recent-orders th {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .recent-orders td {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* General Styles for Responsive Design */
+      @media (max-width: 768px) {
+        main {
+          width: 100%;
+          margin-left: 0;
+        }
+
+        .insights {
+          flex-direction: column;
+        }
+
+        .charts-container {
+          flex-direction: column;
+        }
+
+        .chart,
+        .insights .sales,
+        .insights .expenses,
+        .insights .income {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <div class="top">
+          <div class="logo">
+            <h2>Therapy<span class="danger">Flow</span></h2>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <div class="sidebar-menu">
+            <ul>
+              <li>
+                <span class="material-icons-sharp"> home </span>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <span class="material-icons-sharp"> dashboard </span>
+                <a href="#">Dashboard</a>
+              </li>
+              <li>
+                <span class="material-icons-sharp"> event </span>
+                <a href="#">Appointment</a>
+              </li>
+              <li>
+                <span class="material-icons-sharp"> account_circle </span>
+                <a href="#">Profile</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <h1>Supervisor Dashboard</h1>
+
+        <div class="date">
+          <input type="date" />
+        </div>
+
+        <div class="insights">
+          <!-- Patients -->
+          <div class="sales">
+            <span class="material-icons-sharp"> analytics </span>
+            <div class="middle">
+              <div class="left">
+                <h3>Patients</h3>
+                <h1>25</h1>
+              </div>
+            </div>
+            <small class="text-muted"> Last 24 hours </small>
+          </div>
+
+          <!-- Therapists -->
+          <div class="expenses">
+            <span class="material-icons-sharp"> bar_chart </span>
+            <div class="middle">
+              <div class="left">
+                <h3>Therapists</h3>
+                <h1>45</h1>
+              </div>
+            </div>
+            <small class="text-muted"> Last 24 hours </small>
+          </div>
+
+          <!-- Sessions -->
+          <div class="income">
+            <span class="material-icons-sharp"> stacked_line_chart </span>
+            <div class="middle">
+              <div class="left">
+                <h3>Sessions</h3>
+                <h1>10</h1>
+              </div>
+            </div>
+            <small class="text-muted"> Last 24 hours </small>
+          </div>
+        </div>
+
+        <div class="charts-container">
+          <h2>Progress Overview</h2>
+        </div>
+
+        <div class="charts-container">
+          <div class="chart">
+            <canvas id="patientsChart"></canvas>
+          </div>
+          <div class="chart">
+            <canvas id="therapistsChart"></canvas>
+          </div>
+          <div class="chart">
+            <canvas id="sessionsChart"></canvas>
+          </div>
+        </div>
+
+        <div class="recent-orders">
+          <h2>Recent Sessions</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Patient Name</th>
+                <th>Therapist Name</th>
+                <th>Session Time</th>
+                <th>Status</th>
+                <th>Report</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John Doe</td>
+                <td>Dr. Smith</td>
+                <td>10:00 AM</td>
+                <td>Completed</td>
+                <td>
+                  <a href="Report1.html">
+                  <img src="report.png" style="width: 20px;">
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Roe</td>
+                <td>Dr. Brown</td>
+                <td>11:30 AM</td>
+                <td>Upcoming</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td>Jane Roe</td>
+                <td>Dr. Brown</td>
+                <td>11:30 AM</td>
+                <td>Upcoming</td>
+                <td>Pending</td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#">Show All</a>
+        </div>
+      </main>
+    </div>
+
+    <!-- Chart.js Example Configurations -->
+    <script>
+      // Patients Chart
+      const ctx1 = document.getElementById('patientsChart').getContext('2d');
+      new Chart(ctx1, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Patients',
+            data: [12, 19, 3, 5, 2, 3, 10],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Therapists Chart
+      const ctx2 = document.getElementById('therapistsChart').getContext('2d');
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Therapists',
+            data: [7, 11, 5, 8, 3, 7, 6],
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Sessions Chart
+      const ctx3 = document.getElementById('sessionsChart').getContext('2d');
+      new Chart(ctx3, {
+        type: 'pie',
+        data: {
+          labels: ['Completed', 'Upcoming'],
+          datasets: [{
+            label: 'Sessions',
+            data: [30, 10],
+            backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+        }
+      });
+    </script>
+  </body>
+</html>
